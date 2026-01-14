@@ -25,7 +25,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Équipements - lecture pour tous, modification pour super admin uniquement
     Route::get('/equipments', [EquipmentController::class, 'index'])->name('equipments.index');
-    Route::get('/equipments/{equipment}', [EquipmentController::class, 'show'])->name('equipments.show');
     Route::middleware('superadmin')->group(function () {
         Route::get('/equipments/create', [EquipmentController::class, 'create'])->name('equipments.create');
         Route::post('/equipments', [EquipmentController::class, 'store'])->name('equipments.store');
@@ -33,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/equipments/{equipment}', [EquipmentController::class, 'update'])->name('equipments.update');
         Route::delete('/equipments/{equipment}', [EquipmentController::class, 'destroy'])->name('equipments.destroy');
     });
+    Route::get('/equipments/{equipment}', [EquipmentController::class, 'show'])->name('equipments.show');
 
     Route::resource('maintenances', MaintenanceController::class);
 
