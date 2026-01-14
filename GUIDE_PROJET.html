@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Complet - IT Inventory Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        .code-block code {
+            color: #e2e8f0;
+        }
+        .nav-link {
+            transition: all 0.2s;
+        }
+        .nav-link:hover {
+            background-color: #f1f5f9;
+            padding-left: 1rem;
+        }
+        .section-anchor {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 overflow-y-auto z-10">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold text-indigo-600 mb-6">📚 Guide IT Inventory</h1>
+            <nav class="space-y-2">
+                <a href="#overview" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🎯 Vue d'ensemble</a>
+                <a href="#architecture" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🏗️ Architecture Laravel</a>
+                <a href="#structure" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">📁 Structure des fichiers</a>
+                <a href="#models" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🗄️ Modèles Eloquent</a>
+                <a href="#controllers" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🎮 Contrôleurs</a>
+                <a href="#requests" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">✅ Form Requests</a>
+                <a href="#middleware" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🛡️ Middleware</a>
+                <a href="#routes" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🛣️ Routes</a>
+                <a href="#views" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🎨 Vues & Composants</a>
+                <a href="#migrations" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">📊 Migrations</a>
+                <a href="#seeders" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🌱 Seeders</a>
+                <a href="#features" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">⚙️ Fonctionnalités</a>
+                <a href="#patterns" class="block nav-link px-3 py-2 rounded text-gray-700 hover:bg-gray-100">🔧 Patterns utilisés</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- Vue d'ensemble -->
+            <section id="overview" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">🎯 Vue d'ensemble du Projet</h2>
+                    <div class="space-y-4 text-gray-700">
+                        <p><strong>IT Inventory</strong> est un système de gestion de parc informatique développé avec <strong>Laravel 12</strong> et <strong>PHP 8.2+</strong>.</p>
+                        
+                        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded">
+                            <h3 class="font-semibold text-indigo-900 mb-2">Objectif principal :</h3>
+                            <p class="text-indigo-800">Gérer efficacement un parc informatique : équipements, employés, affectations, maintenances, départements et catégories.</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mt-6">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-blue-900">Technologies Frontend</h4>
+                                <ul class="text-blue-800 text-sm mt-2 space-y-1">
+                                    <li>• Blade Templates</li>
+                                    <li>• Tailwind CSS</li>
+                                    <li>• Alpine.js</li>
+                                    <li>• Dark Mode</li>
+                                </ul>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-green-900">Technologies Backend</h4>
+                                <ul class="text-green-800 text-sm mt-2 space-y-1">
+                                    <li>• Laravel 12</li>
+                                    <li>• PHP 8.2+</li>
+                                    <li>• Eloquent ORM</li>
+                                    <li>• MySQL/SQLite</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Laravel -->
+            <section id="architecture" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🏗️ Architecture Laravel</h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">📐 Pattern MVC (Model-View-Controller)</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                                    <h4 class="font-bold text-purple-900 mb-2">Model</h4>
+                                    <p class="text-sm text-purple-800">Gestion des données et relations Eloquent</p>
+                                    <p class="text-xs text-purple-600 mt-2">app/Models/</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                    <h4 class="font-bold text-blue-900 mb-2">View</h4>
+                                    <p class="text-sm text-blue-800">Templates Blade pour l'affichage</p>
+                                    <p class="text-xs text-blue-600 mt-2">resources/views/</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                                    <h4 class="font-bold text-green-900 mb-2">Controller</h4>
+                                    <p class="text-sm text-green-800">Logique métier et coordination</p>
+                                    <p class="text-xs text-green-600 mt-2">app/Http/Controllers/</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-3">🔄 Flux de Requête Laravel</h3>
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                                    <li><strong>Route</strong> (routes/web.php) → Définit l'URL et le contrôleur</li>
+                                    <li><strong>Middleware</strong> → Vérifie l'authentification/autorisation</li>
+                                    <li><strong>Controller</strong> → Traite la requête</li>
+                                    <li><strong>Form Request</strong> → Valide les données (si POST/PUT)</li>
+                                    <li><strong>Model</strong> → Interagit avec la base de données</li>
+                                    <li><strong>View</strong> → Génère la réponse HTML</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Structure des fichiers -->
+            <section id="structure" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">📁 Structure des Fichiers</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h3 class="font-semibold text-gray-800">app/</h3>
+                            <ul class="text-sm text-gray-600 mt-2 space-y-1 ml-4">
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">Http/Controllers/</code> → Contrôleurs (CRUD)</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">Http/Middleware/</code> → Middleware personnalisés</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">Http/Requests/</code> → Validation des formulaires</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">Models/</code> → Modèles Eloquent</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">View/Components/</code> → Composants Blade</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">Providers/</code> → Service Providers</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h3 class="font-semibold text-gray-800">resources/</h3>
+                            <ul class="text-sm text-gray-600 mt-2 space-y-1 ml-4">
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">views/</code> → Templates Blade</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">css/</code> → Styles Tailwind</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">js/</code> → JavaScript/Alpine.js</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-semibold text-gray-800">database/</h3>
+                            <ul class="text-sm text-gray-600 mt-2 space-y-1 ml-4">
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">migrations/</code> → Schéma de la base de données</li>
+                                <li>📂 <code class="bg-gray-100 px-1 rounded">seeders/</code> → Données de test</li>
+                            </ul>
+                        </div>
+
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                            <h3 class="font-semibold text-gray-800">routes/</h3>
+                            <ul class="text-sm text-gray-600 mt-2 space-y-1 ml-4">
+                                <li>📄 <code class="bg-gray-100 px-1 rounded">web.php</code> → Routes web principales</li>
+                                <li>📄 <code class="bg-gray-100 px-1 rounded">auth.php</code> → Routes d'authentification</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modèles Eloquent -->
+            <section id="models" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🗄️ Modèles Eloquent</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-semibold text-blue-900 mb-4">📊 Schéma des Relations</h3>
+                            <div class="code-block">
+User (super_admin, technician)
+├── hasMany → Assignments
+└── hasMany → Maintenances (reported_by)
+
+Department
+└── hasMany → Employees
+
+Category
+└── hasMany → Equipments
+
+Employee
+├── belongsTo → Department
+└── hasMany → Assignments
+
+Equipment
+├── belongsTo → Category
+├── hasMany → Assignments
+├── hasOne → currentAssignment (whereNull returned_at)
+└── hasMany → Maintenances
+
+Assignment
+├── belongsTo → Equipment
+├── belongsTo → Employee
+└── belongsTo → User (assigned_by)
+
+Maintenance
+├── belongsTo → Equipment
+└── belongsTo → User (reported_by)
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">User Model</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Rôles: super_admin, technician</li>
+                                    <li>• Accessor: full_name</li>
+                                    <li>• Méthodes: isSuperAdmin(), isTechnician()</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">Equipment Model</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Scopes: available(), assigned(), broken()</li>
+                                    <li>• Méthodes: isWarrantyExpiringSoon(), isWarrantyExpired()</li>
+                                    <li>• Boot: Calcule warranty_expires_at</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">Employee Model</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Accessor: full_name</li>
+                                    <li>• Relation: currentAssignments()</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">Maintenance Model</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Scopes: open(), inProgress(), resolved()</li>
+                                    <li>• Méthodes: isOpen(), isInProgress(), isResolved()</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contrôleurs -->
+            <section id="controllers" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🎮 Contrôleurs</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-indigo-900 mb-3">Structure Standard CRUD</h3>
+                            <div class="code-block">
+index()    → Liste avec recherche/filtres + pagination
+create()   → Formulaire de création
+store()    → Validation + création + redirection
+show()     → Affichage détaillé avec relations
+edit()     → Formulaire d'édition
+update()   → Validation + mise à jour + redirection
+destroy()  → Suppression + redirection
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">EquipmentController</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Upload d'images</li>
+                                    <li>• Recherche: serial_number, model, name</li>
+                                    <li>• Filtres: category_id, status</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">EmployeeController</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Recherche: first_name, last_name, email</li>
+                                    <li>• Filtre: department_id</li>
+                                    <li>• Tri par last_name</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">AssignmentController</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• create(): Affiche équipements disponibles</li>
+                                    <li>• store(): Crée assignation + met à jour status</li>
+                                    <li>• return(): Retour équipement</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">DashboardController</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• KPIs: total, available, assigned, broken</li>
+                                    <li>• Alertes garanties</li>
+                                    <li>• Activités récentes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Form Requests -->
+            <section id="requests" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">✅ Form Requests (Validation)</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-green-900 mb-2">Principe</h3>
+                            <p class="text-sm text-green-800">Les Form Requests centralisent la validation des données avant qu'elles n'atteignent le contrôleur.</p>
+                        </div>
+
+                        <div class="code-block">
+// Exemple: StoreEquipmentRequest
+public function rules(): array
+{
+    return [
+        'name' => ['required', 'string', 'max:255'],
+        'serial_number' => ['required', 'unique:equipments,serial_number'],
+        'category_id' => ['required', 'exists:categories,id'],
+        'status' => ['required', 'in:available,assigned,broken,scrapped'],
+        'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+    ];
+}
+
+// Dans le Controller
+public function store(StoreEquipmentRequest $request)
+{
+    $data = $request->validated(); // Données déjà validées !
+    Equipment::create($data);
+}
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="border border-gray-200 p-3 rounded-lg">
+                                <h4 class="font-semibold text-sm text-gray-800">Store*Request</h4>
+                                <p class="text-xs text-gray-600">Validation création</p>
+                            </div>
+                            <div class="border border-gray-200 p-3 rounded-lg">
+                                <h4 class="font-semibold text-sm text-gray-800">Update*Request</h4>
+                                <p class="text-xs text-gray-600">Validation mise à jour</p>
+                            </div>
+                            <div class="border border-gray-200 p-3 rounded-lg">
+                                <h4 class="font-semibold text-sm text-gray-800">ProfileUpdateRequest</h4>
+                                <p class="text-xs text-gray-600">Validation profil</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Middleware -->
+            <section id="middleware" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🛡️ Middleware</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-yellow-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-yellow-900 mb-2">EnsureUserIsSuperAdmin</h3>
+                            <p class="text-sm text-yellow-800 mb-2">Vérifie que l'utilisateur est super_admin avant d'accéder aux routes protégées.</p>
+                            <div class="code-block">
+public function handle(Request $request, Closure $next)
+{
+    if (!auth()->check() || !auth()->user()->isSuperAdmin()) {
+        abort(403, 'Accès réservé aux super administrateurs.');
+    }
+    return $next($request);
+}
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-blue-900 mb-2">Enregistrement dans bootstrap/app.php</h3>
+                            <div class="code-block">
+->withMiddleware(function (Middleware $middleware): void {
+    $middleware->alias([
+        'superadmin' => \App\Http\Middleware\EnsureUserIsSuperAdmin::class,
+    ]);
+})
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-900 mb-2">Utilisation dans les routes</h3>
+                            <div class="code-block">
+Route::middleware('superadmin')->group(function () {
+    Route::resource('departments', DepartmentController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('users', UserController::class);
+});
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Routes -->
+            <section id="routes" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🛣️ Routes</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-purple-900 mb-3">Structure des Routes</h3>
+                            <div class="code-block">
+// Route publique
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
+// Routes authentifiées
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
+    
+    // Resources CRUD (tous utilisateurs)
+    Route::resource('equipments', EquipmentController::class);
+    Route::resource('employees', EmployeeController::class);
+    Route::resource('maintenances', MaintenanceController::class);
+    
+    // Assignments (actions spécifiques)
+    Route::get('/assignments/create', [AssignmentController::class, 'create'])
+        ->name('assignments.create');
+    Route::post('/assignments', [AssignmentController::class, 'store'])
+        ->name('assignments.store');
+    Route::post('/assignments/{assignment}/return', [AssignmentController::class, 'return'])
+        ->name('assignments.return');
+    
+    // Routes Super Admin uniquement
+    Route::middleware('superadmin')->group(function () {
+        Route::resource('departments', DepartmentController::class);
+        Route::resource('categories', CategoryController::class);
+        Route::resource('users', UserController::class);
+    });
+});
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">Route Resource</h4>
+                                <p class="text-sm text-gray-600">Génère automatiquement 7 routes CRUD :</p>
+                                <ul class="text-xs text-gray-500 mt-2 space-y-1">
+                                    <li>GET /equipments → index</li>
+                                    <li>GET /equipments/create → create</li>
+                                    <li>POST /equipments → store</li>
+                                    <li>GET /equipments/{id} → show</li>
+                                    <li>GET /equipments/{id}/edit → edit</li>
+                                    <li>PUT /equipments/{id} → update</li>
+                                    <li>DELETE /equipments/{id} → destroy</li>
+                                </ul>
+                            </div>
+                            <div class="border border-gray-200 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-2">Noms de Routes</h4>
+                                <p class="text-sm text-gray-600">Utilisation dans les vues :</p>
+                                <div class="code-block text-xs mt-2">
+route('equipments.index')
+route('equipments.create')
+route('equipments.show', $equipment)
+route('equipments.edit', $equipment)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Vues & Composants -->
+            <section id="views" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🎨 Vues & Composants Blade</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-indigo-900 mb-3">Composants Blade Réutilisables</h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-page-header</h4>
+                                    <p class="text-xs text-indigo-700">En-tête de page avec titre/sous-titre</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-card</h4>
+                                    <p class="text-xs text-indigo-700">Carte avec ombre et bordure</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-button-primary</h4>
+                                    <p class="text-xs text-indigo-700">Bouton principal indigo</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-button-secondary</h4>
+                                    <p class="text-xs text-indigo-700">Bouton secondaire</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-button-danger</h4>
+                                    <p class="text-xs text-indigo-700">Bouton danger (rouge)</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-table-actions</h4>
+                                    <p class="text-xs text-indigo-700">Actions table (voir/modifier/supprimer)</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-status-badge</h4>
+                                    <p class="text-xs text-indigo-700">Badge de statut coloré</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-alert</h4>
+                                    <p class="text-xs text-indigo-700">Message d'alerte</p>
+                                </div>
+                                <div class="bg-white p-3 rounded border border-indigo-200">
+                                    <h4 class="font-semibold text-sm text-indigo-900">x-dark-mode-toggle</h4>
+                                    <p class="text-xs text-indigo-700">Toggle mode sombre</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-900 mb-2">Exemple d'utilisation</h3>
+                            <div class="code-block">
+<x-app-layout>
+    <x-page-header
+        title="Équipements"
+        subtitle="Gérez votre parc informatique"
+        action-label="Ajouter"
+        action-href="{{ route('equipments.create') }}"
+    />
+    
+    <x-card>
+        <table>
+            @foreach($equipments as $equipment)
+                <tr>
+                    <td>{{ $equipment->name }}</td>
+                    <td>
+                        <x-table-actions
+                            :show-route="route('equipments.show', $equipment)"
+                            :edit-route="route('equipments.edit', $equipment)"
+                            :delete-route="route('equipments.destroy', $equipment)"
+                        />
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </x-card>
+</x-app-layout>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Migrations -->
+            <section id="migrations" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">📊 Migrations</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-blue-900 mb-2">Tables Principales</h3>
+                            <div class="grid grid-cols-2 gap-3 text-sm">
+                                <div>
+                                    <strong>users</strong>
+                                    <ul class="text-blue-700 ml-4 mt-1 space-y-1">
+                                        <li>• name, prenom, email, tel</li>
+                                        <li>• role: enum('super_admin', 'technician')</li>
+                                        <li>• password (hashed)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>departments</strong>
+                                    <ul class="text-blue-700 ml-4 mt-1 space-y-1">
+                                        <li>• name, description</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>categories</strong>
+                                    <ul class="text-blue-700 ml-4 mt-1 space-y-1">
+                                        <li>• name, type, description</li>
+                                        <li>• type: enum('hardware', 'accessory')</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>employees</strong>
+                                    <ul class="text-blue-700 ml-4 mt-1 space-y-1">
+                                        <li>• first_name, last_name, email, phone</li>
+                                        <li>• department_id (FK)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>equipments</strong>
+                                    <ul class="text-blue-700 ml-4 mt-1 space-y-1">
+                                        <li>• name, brand, model, serial_number</li>
+                                        <li>• category_id (FK)</li>
+                                        <li>• status: enum</li>
+                                        <li>• warranty_duration, warranty_expires_at</li>
+                                        <li>• image_path, details (JSON)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>assignments</strong>
+                                    <ul class="text-blue-700 ml-4 mt-1 space-y-1">
+                                        <li>• equipment_id, employee_id, user_id</li>
+                                        <li>• assigned_at, returned_at</li>
+                                        <li>• notes</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <strong>maintenances</strong>
+                                    <ul class="text-blue-700 ml-4 mt-1 space-y-1">
+                                        <li>• equipment_id, reported_by</li>
+                                        <li>• description, status</li>
+                                        <li>• cost (integer), reported_at, resolved_at</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-gray-900 mb-2">Clés Étrangères (Foreign Keys)</h3>
+                            <div class="code-block">
+equipments.category_id → categories.id (onDelete: restrict)
+employees.department_id → departments.id
+assignments.equipment_id → equipments.id
+assignments.employee_id → employees.id
+assignments.user_id → users.id
+maintenances.equipment_id → equipments.id
+maintenances.reported_by → users.id
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seeders -->
+            <section id="seeders" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🌱 Seeders</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-green-900 mb-2">Ordre d'exécution (DatabaseSeeder)</h3>
+                            <div class="code-block">
+1. UserSeeder → 1 super_admin + 10 technicians
+2. DepartmentSeeder → 5 départements
+3. CategorySeeder → Catégories hardware/accessory
+4. EmployeeSeeder → 30 employés
+5. EquipmentSeeder → 50 équipements
+6. AssignmentSeeder → Affectations
+7. MaintenanceSeeder → 25 maintenances
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h3 class="font-semibold text-blue-900 mb-2">Utilisation de Faker</h3>
+                            <div class="code-block">
+// Génération de données réalistes
+User::create([
+    'name' => fake()->lastName(),
+    'prenom' => fake()->firstName(),
+    'email' => fake()->unique()->safeEmail(),
+    'tel' => $this->generatePhoneNumber(), // Format spécifique
+    'password' => Hash::make('password'),
+    'role' => 'technician',
+]);
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fonctionnalités -->
+            <section id="features" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">⚙️ Fonctionnalités Principales</h2>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">🔐 Authentification</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Connexion/Déconnexion</li>
+                                <li>• Récupération mot de passe</li>
+                                <li>• Vérification email (optionnelle)</li>
+                                <li>• Inscription désactivée (admin only)</li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">👥 Gestion Utilisateurs</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Rôles: super_admin, technician</li>
+                                <li>• CRUD techniciens (super_admin only)</li>
+                                <li>• Profil utilisateur (édition)</li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">💻 Gestion Équipements</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• CRUD complet</li>
+                                <li>• Upload d'images</li>
+                                <li>• Statuts: available, assigned, broken, scrapped</li>
+                                <li>• Calcul automatique garantie</li>
+                                <li>• Recherche et filtres</li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">👨‍💼 Gestion Employés</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• CRUD complet</li>
+                                <li>• Association département</li>
+                                <li>• Historique affectations</li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">📦 Affectations</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Assigner équipement à employé</li>
+                                <li>• Retour équipement</li>
+                                <li>• Historique complet</li>
+                                <li>• Mise à jour automatique statut</li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">🔧 Maintenances</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Signalement pannes</li>
+                                <li>• Statuts: open, in_progress, resolved</li>
+                                <li>• Suivi coûts (en DH)</li>
+                                <li>• Dates reported/resolved</li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">📊 Dashboard</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• KPIs: total, available, assigned, broken</li>
+                                <li>• Alertes garanties expirant</li>
+                                <li>• Activités récentes</li>
+                                <li>• Maintenances actives</li>
+                            </ul>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-3">🌙 Dark Mode</h3>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• Toggle mode sombre/clair</li>
+                                <li>• Persistance localStorage</li>
+                                <li>• Détection préférence système</li>
+                                <li>• Support complet toutes pages</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patterns -->
+            <section id="patterns" class="section-anchor mb-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">🔧 Patterns & Bonnes Pratiques</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">1. Repository Pattern (implicite)</h3>
+                            <p class="text-sm text-gray-600">Les modèles Eloquent agissent comme des repositories. Toute la logique de base de données est dans les modèles.</p>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">2. Form Request Pattern</h3>
+                            <p class="text-sm text-gray-600">Validation centralisée dans des classes dédiées (Store*Request, Update*Request).</p>
+                        </div>
+
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">3. Component Pattern</h3>
+                            <p class="text-sm text-gray-600">Composants Blade réutilisables pour éviter la duplication de code (x-card, x-button-primary, etc.).</p>
+                        </div>
+
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">4. Eager Loading</h3>
+                            <p class="text-sm text-gray-600">Utilisation de <code class="bg-gray-100 px-1 rounded">with()</code> pour éviter le problème N+1.</p>
+                            <div class="code-block mt-2">
+// ❌ Mauvais (N+1 queries)
+$equipments = Equipment::all();
+foreach ($equipments as $equipment) {
+    echo $equipment->category->name; // Query à chaque itération
+}
+
+// ✅ Bon (1 query)
+$equipments = Equipment::with('category')->get();
+foreach ($equipments as $equipment) {
+    echo $equipment->category->name; // Pas de query supplémentaire
+}
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">5. Scopes Eloquent</h3>
+                            <p class="text-sm text-gray-600">Méthodes de requête réutilisables dans les modèles.</p>
+                            <div class="code-block mt-2">
+// Dans Equipment Model
+public function scopeAvailable($query)
+{
+    return $query->where('status', 'available');
+}
+
+// Utilisation
+$available = Equipment::available()->get();
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">6. Accessors & Mutators</h3>
+                            <p class="text-sm text-gray-600">Transformation automatique des attributs.</p>
+                            <div class="code-block mt-2">
+// Accessor (getFullNameAttribute)
+$user->full_name; // Retourne "Nom Prénom"
+
+// Mutator (setPasswordAttribute)
+$user->password = 'plain'; // Hash automatique
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-pink-500 pl-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">7. Model Events (Boot)</h3>
+                            <p class="text-sm text-gray-600">Logique automatique lors de la création/mise à jour.</p>
+                            <div class="code-block mt-2">
+// Dans Equipment Model
+protected static function boot()
+{
+    parent::boot();
+    
+    static::creating(function ($equipment) {
+        // Calcule warranty_expires_at automatiquement
+        if ($equipment->purchase_date && $equipment->warranty_duration) {
+            $equipment->warranty_expires_at = 
+                Carbon::parse($equipment->purchase_date)
+                    ->addMonths($equipment->warranty_duration);
+        }
+    });
+}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="mt-16 py-8 text-center text-gray-600 border-t border-gray-200">
+                <p>📚 Guide IT Inventory - Projet Laravel 12</p>
+                <p class="text-sm mt-2">Dernière mise à jour : {{ date('d/m/Y') }}</p>
+            </footer>
+
+        </div>
+    </div>
+</body>
+</html>
